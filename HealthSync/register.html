@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HealthSync Clinic – Provider Login</title>
+    <title>HealthSync Clinic – Create Patient Account</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
@@ -184,9 +184,9 @@
             margin-left: 80px;
             flex: 1;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            padding: 2rem;
+            padding: 2.5rem 3rem;
             transition: var(--transition);
         }
 
@@ -194,84 +194,160 @@
             margin-left: 280px;
         }
 
-        /* -------------------------- LOGIN CONTAINER -------------------------- */
-        .login-container {
+        /* -------------------------- REGISTRATION CONTAINER -------------------------- */
+        .registration-container {
             width: 100%;
-            max-width: 520px;
+            max-width: 600px;
             background-color: var(--white);
             box-shadow: var(--shadow-md);
             border-radius: var(--border-radius-lg);
-            padding: 3.5rem 3rem;
-            position: relative;
-            overflow: hidden;
+            padding: 3rem 2.8rem;
+            margin: 2rem 0;
         }
 
-        .login-banner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 12px;
-            background: linear-gradient(90deg, var(--primary-blue), var(--primary-green));
-        }
-
-        .login-header {
+        .registration-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
         }
 
-        .login-header .logo {
-            width: 68px;
-            height: 68px;
+        .registration-header .logo {
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin: 0 auto 1.8rem auto;
-            border: 3px solid var(--light-gray);
+            margin: 0 auto 1.5rem auto;
         }
 
-        .login-header h1 {
-            font-size: 2rem;
+        .registration-header h1 {
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--dark-gray);
             margin-bottom: 0.8rem;
         }
 
-        .login-header p {
-            font-size: 1rem;
+        .registration-header p {
+            font-size: 0.95rem;
             color: var(--text-muted);
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
-            line-height: 1.5;
         }
 
-        .provider-badge {
-            display: inline-block;
+        /* -------------------------- PROGRESS STEPS -------------------------- */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .progress-steps::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 2px;
+            background-color: var(--medium-gray);
+            z-index: 0;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 33%;
+            height: 2px;
+            background-color: var(--primary-blue);
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            background-color: var(--white);
+            padding: 0 0.5rem;
+        }
+
+        .step-indicator {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--medium-gray);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin: 0 auto 0.5rem auto;
+            transition: var(--transition);
+        }
+
+        .step.active .step-indicator {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .step.completed .step-indicator {
             background-color: var(--primary-green);
             color: var(--white);
-            font-size: 0.8rem;
-            font-weight: 500;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            margin-top: 1rem;
+            content: "\f00c";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
         }
 
-        /* -------------------------- FORM STYLES -------------------------- */
+        .step-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .step.completed .step-label {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* -------------------------- FORM SECTIONS -------------------------- */
+        .form-section {
+            display: block;
+        }
+
+        .form-section.hidden {
+            display: none;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
         .form-group {
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-label {
             display: block;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             color: var(--dark-gray);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
         .form-label.required::after {
@@ -281,7 +357,7 @@
 
         .form-input {
             width: 100%;
-            padding: 1.1rem 1.3rem;
+            padding: 1rem 1.2rem;
             border: 1px solid var(--medium-gray);
             border-radius: var(--border-radius);
             font-size: 1rem;
@@ -296,26 +372,17 @@
             box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
         }
 
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
         .input-group {
             position: relative;
         }
 
-        .input-icon {
-            position: absolute;
-            left: 1.3rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
-
-        .input-icon + .form-input {
-            padding-left: 4rem;
-        }
-
         .toggle-password {
             position: absolute;
-            right: 1.3rem;
+            right: 1.2rem;
             top: 50%;
             transform: translateY(-50%);
             background: none;
@@ -330,124 +397,78 @@
             color: var(--dark-gray);
         }
 
-        /* -------------------------- TWO-FACTOR AUTH SECTION -------------------------- */
-        .2fa-section {
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background-color: var(--light-gray);
-            border-radius: var(--border-radius);
-            display: none;
+        .select-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236B778C' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 1.2rem;
+            padding-right: 3.5rem !important;
         }
 
-        .2fa-section.active {
-            display: block;
+        .date-input {
+            color: var(--text-muted);
         }
 
-        .2fa-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .2fa-icon {
-            font-size: 1.3rem;
-            color: var(--warning-yellow);
-        }
-
-        .2fa-header h4 {
-            font-size: 1rem;
-            font-weight: 600;
+        .date-input:focus {
             color: var(--dark-gray);
         }
 
-        .2fa-inputs {
-            display: flex;
-            gap: 0.8rem;
-            justify-content: center;
-            margin: 1.5rem 0;
-        }
-
-        .2fa-input {
-            width: 50px;
-            height: 50px;
-            text-align: center;
-            font-size: 1.5rem;
-            border: 1px solid var(--medium-gray);
+        /* -------------------------- CONSENT SECTION -------------------------- */
+        .consent-group {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--light-gray);
             border-radius: var(--border-radius);
         }
 
-        .2fa-input:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.1);
+        .consent-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
         }
 
-        .resend-code {
-            text-align: center;
+        .consent-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .consent-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-blue);
+            cursor: pointer;
+            margin-top: 0.2rem;
+        }
+
+        .consent-text {
             font-size: 0.9rem;
+            color: var(--dark-gray);
         }
 
-        .resend-code a {
+        .consent-text a {
             color: var(--primary-blue);
             text-decoration: none;
             font-weight: 500;
         }
 
-        .resend-code a:hover {
-            text-decoration: underline;
-        }
-
-        /* -------------------------- FORM OPTIONS -------------------------- */
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2.5rem;
-        }
-
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.95rem;
-            color: var(--dark-gray);
-            cursor: pointer;
-        }
-
-        .remember-me input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--primary-blue);
-            cursor: pointer;
-        }
-
-        .forgot-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-            text-align: right;
-        }
-
-        .forgot-link {
-            font-size: 0.9rem;
-            color: var(--primary-blue);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .forgot-link:hover {
-            color: var(--secondary-blue);
+        .consent-text a:hover {
             text-decoration: underline;
         }
 
         /* -------------------------- BUTTONS -------------------------- */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
         .btn {
-            width: 100%;
-            padding: 1.1rem;
+            padding: 1rem 1.5rem;
             border: none;
             border-radius: var(--border-radius);
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
             display: inline-block;
@@ -459,8 +480,7 @@
         .btn-primary {
             background-color: var(--primary-blue);
             color: var(--white);
-            position: relative;
-            overflow: hidden;
+            flex: 1;
         }
 
         .btn-primary:hover {
@@ -468,41 +488,50 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .btn-primary:disabled {
-            background-color: var(--medium-gray);
-            color: var(--text-muted);
-            cursor: not-allowed;
-        }
-
         .btn-secondary {
             background-color: var(--white);
-            color: var(--primary-blue);
-            border: 1px solid var(--primary-blue);
-            margin-top: 1.5rem;
+            color: var(--dark-gray);
+            border: 1px solid var(--medium-gray);
+            width: 120px;
         }
 
         .btn-secondary:hover {
             background-color: var(--light-gray);
+            border-color: var(--text-muted);
         }
 
-        /* -------------------------- COMPLIANCE NOTICE -------------------------- */
-        .compliance-notice {
-            margin-top: 2.5rem;
-            padding: 1.5rem;
-            background-color: var(--light-gray);
-            border-radius: var(--border-radius);
-            font-size: 0.9rem;
-            color: var(--dark-gray);
-            line-height: 1.5;
+        .btn-disabled {
+            background-color: var(--medium-gray);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            flex: 1;
         }
 
-        .compliance-notice i {
-            color: var(--primary-blue);
-            margin-right: 0.5rem;
+        .btn-disabled:hover {
+            background-color: var(--medium-gray);
+            box-shadow: none;
         }
 
-        /* -------------------------- FOOTER LINKS -------------------------- */
-        .login-footer {
+        /* -------------------------- HELPER TEXT -------------------------- */
+        .helper-text {
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        .helper-text.info {
+            color: var(--text-muted);
+        }
+
+        .helper-text.error {
+            color: var(--alert-red);
+        }
+
+        .helper-text.success {
+            color: var(--primary-green);
+        }
+
+        /* -------------------------- ACCOUNT TYPE SWITCH -------------------------- */
+        .account-type-switch {
             text-align: center;
             margin-top: 2.5rem;
             padding-top: 2rem;
@@ -511,36 +540,36 @@
             color: var(--text-muted);
         }
 
-        .login-footer a {
+        .account-type-switch a {
             color: var(--primary-blue);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
         }
 
-        .login-footer a:hover {
+        .account-type-switch a:hover {
             color: var(--secondary-blue);
             text-decoration: underline;
         }
 
-        /* -------------------------- SECURITY BADGES -------------------------- */
+                /* -------------------------- SECURITY BADGES -------------------------- */
         .security-badges {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
         .security-badge {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            font-size: 0.9rem;
+            gap: 0.5rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
 
         .security-badge i {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--primary-green);
         }
 
@@ -558,81 +587,69 @@
             }
 
             .sidebar-logo-container {
-               
-            justify-content: flex-start;
-        }
+                justify-content: flex-start;
+            }
 
-        .sidebar-logo {
-            margin: 0;
-        }
+            .sidebar-logo {
+                margin: 0;
+            }
 
-        .sidebar-brand-name, .sidebar-brand-tagline, .nav-link span {
-            display: block;
-        }
+            .sidebar-brand-name, .sidebar-brand-tagline, .nav-link span {
+                display: block;
+            }
 
-        .nav-link {
-            justify-content: flex-start;
-            padding: 1rem 1.2rem;
-        }
+            .nav-link {
+                justify-content: flex-start;
+                padding: 1rem 1.2rem;
+            }
 
-        .sidebar-toggle-btn {
-            display: none;
-        }
+            .sidebar-toggle-btn {
+                display: none;
+            }
 
-        .main-content {
-            margin-left: 0;
-            padding: 1.5rem;
-        }
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+                align-items: flex-start;
+            }
 
-        .mobile-menu-toggle {
-            position: fixed;
-            top: 1.5rem;
-            left: 1.5rem;
-            background-color: var(--white);
-            box-shadow: var(--shadow-sm);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--dark-gray);
-            cursor: pointer;
-            z-index: 101;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            .mobile-menu-toggle {
+                position: fixed;
+                top: 1.5rem;
+                left: 1.5rem;
+                background-color: var(--white);
+                box-shadow: var(--shadow-sm);
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                border: none;
+                font-size: 1.5rem;
+                color: var(--dark-gray);
+                cursor: pointer;
+                z-index: 101;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
 
-        .login-container {
-            padding: 2.5rem 2rem;
-            margin: 1rem 0;
-        }
+            .registration-container {
+                padding: 2.5rem 2rem;
+                margin: 1rem 0;
+            }
 
-        .login-header h1 {
-            font-size: 1.7rem;
-        }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
 
-        .2fa-inputs {
-            gap: 0.5rem;
-        }
+            .form-actions {
+                flex-direction: column-reverse;
+            }
 
-        .2fa-input {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+            .btn-secondary {
+                width: 100%;
+            }
         }
-
-        .form-options {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .forgot-options {
-            text-align: left;
-        }
-    }
-</style>
+    </style>
 </head>
 <body>
     <!-- Mobile Menu Toggle -->
@@ -652,36 +669,21 @@
             </div>
 
             <ul class="nav-menu">
+               
                 <li class="nav-item">
-                    <a href="health.html" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
+                    <a href="login.html" class="nav-link">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="patient-login.html" class="nav-link">
-                        <i class="fas fa-user-injured"></i>
-                        <span>Patient Login</span>
+                    <a href="register.html" class="nav-link active">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Create Account</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="provider-login.html" class="nav-link active">
-                        <i class="fas fa-user-md"></i>
-                        <span>Provider Login</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">
-                        <i class="fas fa-info-circle"></i>
-                        <span>About Us</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="contact.html" class="nav-link">
-                        <i class="fas fa-phone-alt"></i>
-                        <span>Contact Us</span>
-                    </a>
-                </li>
+               
+              
             </ul>
 
             <button class="sidebar-toggle-btn" id="sidebarToggle">
@@ -691,96 +693,220 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <div class="login-container">
-                <div class="login-banner"></div>
-                
-                <div class="login-header">
+            <div class="registration-container">
+                <div class="registration-header">
                     <div class="logo">HS</div>
-                    <h1>Provider Login Portal</h1>
-                    <p>Secure access for licensed healthcare professionals to manage patient care and records</p>
-                    <span class="provider-badge">VERIFIED PROVIDER ONLY</span>
+                    <h1>Create Patient Account</h1>
+                    <p>Complete the 3-step registration to access your personalized health management tools. All information is protected under HIPAA guidelines.</p>
                 </div>
 
-                <!-- Provider Login Form -->
-                <form id="providerLoginForm">
-                    <div class="form-group">
-                        <label for="licenseNumber" class="form-label required">License/PRC Number</label>
-                        <div class="input-group">
-                            <i class="fas fa-id-card input-icon"></i>
-                            <input type="text" id="licenseNumber" class="form-input" placeholder="Enter your valid PRC or professional license number" required>
+                <!-- Progress Steps -->
+                <div class="progress-steps">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="step active" id="step1">
+                        <div class="step-indicator">1</div>
+                        <div class="step-label">Personal Info</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-indicator">2</div>
+                        <div class="step-label">Account Details</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-indicator">3</div>
+                        <div class="step-label">Consent & Verify</div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Personal Information -->
+                <form id="registrationForm">
+                    <div class="form-section active" id="section1">
+                        <h3 class="section-title" style="font-size: 1.2rem; font-weight: 600; margin-bottom: 2rem; color: var(--dark-gray);">Personal Information</h3>
+                        
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label required">First Name</label>
+                                <input type="text" id="firstName" class="form-input" placeholder="Enter your first name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName" class="form-label required">Last Name</label>
+                                <input type="text" id="lastName" class="form-input" placeholder="Enter your last name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="birthDate" class="form-label required">Date of Birth</label>
+                                <input type="date" id="birthDate" class="form-input date-input" required>
+                                <p class="helper-text info">Required for identity verification and age-appropriate care.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender" class="form-label required">Gender Identity</label>
+                                <select id="gender" class="form-input select-input" required>
+                                    <option value="" disabled selected>Select your gender identity</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="non-binary">Non-Binary</option>
+                                    <option value="prefer-not-say">Prefer Not to Say</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="contactNumber" class="form-label required">Contact Number</label>
+                            <input type="tel" id="contactNumber" class="form-input" placeholder="+63 9XX XXX XXXX" required>
+                            <p class="helper-text info">Used for appointment reminders and critical health updates.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address" class="form-label required">Residential Address</label>
+                            <input type="text" id="address" class="form-input" placeholder="House number, street, barangay, city" required>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="city" class="form-label required">City/Municipality</label>
+                                <input type="text" id="city" class="form-input" placeholder="Enter city or municipality" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipCode" class="form-label required">ZIP/Postal Code</label>
+                                <input type="text" id="zipCode" class="form-input" placeholder="Enter ZIP code" required>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="prevBtn1" disabled style="display: none;">Back</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn1">Continue to Account Details</button>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="providerPassword" class="form-label required">Password</label>
-                        <div class="input-group">
-                            <i class="fas fa-lock input-icon"></i>
-                            <input type="password" id="providerPassword" class="form-input" placeholder="Enter your secure password" required>
-                            <button type="button" class="toggle-password" id="toggleProviderPass">
-                                <i class="fas fa-eye-slash"></i>
-                            </button>
+                    <!-- Step 2: Account Details -->
+                    <div class="form-section hidden" id="section2">
+                        <h3 class="section-title" style="font-size: 1.2rem; font-weight: 600; margin-bottom: 2rem; color: var(--dark-gray);">Account Details</h3>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label required">Email Address</label>
+                            <input type="email" id="email" class="form-input" placeholder="Enter your active email address" required>
+                            <p class="helper-text info">Will be used as your username for login and communication.</p>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="password" class="form-label required">Password</label>
+                                <div class="input-group">
+                                    <input type="password" id="password" class="form-input" placeholder="Create a strong password" required>
+                                    <button type="button" class="toggle-password" id="togglePass">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </button>
+                                </div>
+                                <p class="helper-text info">Must be at least 8 characters with 1 uppercase, 1 lowercase, 1 number, and 1 special character.</p>
+                                <p class="helper-text error hidden" id="passwordError">Password does not meet requirements.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword" class="form-label required">Confirm Password</label>
+                                <div class="input-group">
+                                    <input type="password" id="confirmPassword" class="form-input" placeholder="Re-enter your password" required>
+                                    <button type="button" class="toggle-password" id="toggleConfirmPass">
+                                        <i class="fas fa-eye-slash"></i>
+                                    </button>
+                                </div>
+                                <p class="helper-text error hidden" id="confirmError">Passwords do not match.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emergencyContactName" class="form-label required">Emergency Contact Name</label>
+                            <input type="text" id="emergencyContactName" class="form-input" placeholder="Enter full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emergencyContactRel" class="form-label required">Relationship to You</label>
+                            <input type="text" id="emergencyContactRel" class="form-input" placeholder="e.g., Spouse, Parent, Sibling" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="emergencyContactNum" class="form-label required">Emergency Contact Number</label>
+                            <input type="tel" id="emergencyContactNum" class="form-input" placeholder="+63 9XX XXX XXXX" required>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="prevBtn2">Back to Personal Info</button>
+                            <button type="button" class="btn btn-primary" id="nextBtn2">Continue to Consent</button>
                         </div>
                     </div>
 
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" id="rememberProvider">
-                            <span>Remember me for 7 days</span>
-                        </label>
-                        <div class="forgot-options">
-                            <a href="forgot-provider-license.html" class="forgot-link">Forgot License Number?</a>
-                            <a href="forgot-provider-password.html" class="forgot-link">Reset Password</a>
+                    <!-- Step 3: Consent & Verification -->
+                    <div class="form-section hidden" id="section3">
+                        <h3 class="section-title" style="font-size: 1.2rem; font-weight: 600; margin-bottom: 2rem; color: var(--dark-gray);">Consent & Identity Verification</h3>
+                        
+                        <div class="form-group">
+                            <label for="govIdType" class="form-label required">Government-issued ID Type</label>
+                            <select id="govIdType" class="form-input select-input" required>
+                                <option value="" disabled selected>Select ID type for verification</option>
+                                <option value="passport">Passport</option>
+                                <option value="sss">SSS ID</option>
+                                <option value="umid">UMID Card</option>
+                                <option value="prc">PRC ID</option>
+                                <option value="driver">Driver's License</option>
+                                <option value="voter">Voter's ID</option>
+                            </select>
+                            <p class="helper-text info">A clear photo of this ID will be required after registration for verification.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="govIdNumber" class="form-label required">ID Number</label>
+                            <input type="text" id="govIdNumber" class="form-input" placeholder="Enter ID number exactly as shown" required>
+                        </div>
+
+                        <div class="consent-group">
+                            <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--dark-gray);">Required Consents</h4>
+                            
+                            <div class="consent-item">
+                                <input type="checkbox" id="consent1" required>
+                                <label for="consent1" class="consent-text">I consent to HealthSync Clinic collecting and storing my personal and health information for the purpose of providing medical care, as outlined in the <a href="privacy-policy.html">Privacy Policy</a>.</label>
+                            </div>
+                            
+                            <div class="consent-item">
+                                <input type="checkbox" id="consent2" required>
+                                <label for="consent2" class="consent-text">I consent to receiving appointment reminders, health updates, and billing notifications via email and SMS.</label>
+                            </div>
+                            
+                            <div class="consent-item">
+                                <input type="checkbox" id="consent3" required>
+                                <label for="consent3" class="consent-text">I confirm that all information provided is true and accurate. I understand that providing false information may result in account suspension.</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="termsAgree" class="form-label required">
+                                <input type="checkbox" id="termsAgree" required>
+                                <span style="margin-left: 0.5rem;">I have read and agree to the <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a></span>
+                            </label>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="prevBtn3">Back to Account Details</button>
+                            <button type="submit" class="btn btn-primary">Submit Registration</button>
                         </div>
                     </div>
-
-                    <button type="button" class="btn btn-primary" id="loginBtn">Sign In to Dashboard</button>
-                    <a href="create-provider-account.html" class="btn btn-secondary">Apply for Provider Account</a>
                 </form>
 
-                <!-- Two-Factor Authentication Section -->
-                <div class="2fa-section" id="twoFactorSection">
-                    <div class="2fa-header">
-                        <i class="fas fa-shield-alt 2fa-icon"></i>
-                        <h4>Two-Factor Authentication Required</h4>
-                    </div>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;">
-                        A 6-digit verification code has been sent to your registered mobile number and email address.
-                    </p>
-                    <div class="2fa-inputs">
-                        <input type="text" class="2fa-input" maxlength="1" required>
-                        <input type="text" class="2fa-input" maxlength="1" required>
-                        <input type="text" class="2fa-input" maxlength="1" required>
-                        <input type="text" class="2fa-input" maxlength="1" required>
-                        <input type="text" class="2fa-input" maxlength="1" required>
-                        <input type="text" class="2fa-input" maxlength="1" required>
-                    </div>
-                    <div class="resend-code">
-                        <p>Didn't receive the code? <a href="#" id="resendCodeLink">Resend Code (01:59 remaining)</a></p>
-                    </div>
-                    <button type="button" class="btn btn-primary" id="verify2faBtn">Verify & Access Dashboard</button>
-                </div>
-
-                <div class="compliance-notice">
-                    <p><i class="fas fa-exclamation-circle"></i> By logging in, you confirm that you are authorized to access protected health information (PHI) and agree to comply with HIPAA, DOH regulations, and HealthSync's <a href="provider-compliance.html">Provider Code of Conduct</a>.</p>
-                </div>
-
-                <div class="login-footer">
-                    <p>Need help accessing your account? <a href="provider-support.html">Contact Provider Support</a></p>
-                    <p>View our <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-of-service.html">Terms of Service</a></p>
+                <div class="account-type-switch">
+                    <p>Are you a healthcare provider? <a href="create-provider-account.html">Register as Provider Here</a></p>
                 </div>
 
                 <div class="security-badges">
                     <div class="security-badge">
                         <i class="fas fa-lock"></i>
-                        <span>256-Bit Encryption</span>
+                        <span>End-to-End Encrypted</span>
                     </div>
                     <div class="security-badge">
                         <i class="fas fa-shield-alt"></i>
-                        <span>HIPAA & DOH Compliant</span>
+                        <span>HIPAA Compliant</span>
                     </div>
                     <div class="security-badge">
-                        <i class="fas fa-certificate"></i>
-                        <span>ISO 27001 Certified</span>
+                        <i class="fas fa-check-circle"></i>
+                        <span>Verified by DOH</span>
                     </div>
                 </div>
             </div>
@@ -793,7 +919,7 @@
         const sidebarToggle = document.getElementById('sidebarToggle');
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 
-        sidebarToggle.addEventListener('click', () => {
+                sidebarToggle.addEventListener('click', () => {
             sidebar.classList.toggle('sidebar-expanded');
             const icon = sidebarToggle.querySelector('i');
             icon.classList.toggle('fa-angle-double-right');
@@ -818,87 +944,136 @@
             }
         });
 
+        // Step Navigation
+        const progressBar = document.getElementById('progressBar');
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const section1 = document.getElementById('section1');
+        const section2 = document.getElementById('section2');
+        const section3 = document.getElementById('section3');
+        const nextBtn1 = document.getElementById('nextBtn1');
+        const nextBtn2 = document.getElementById('nextBtn2');
+        const prevBtn2 = document.getElementById('prevBtn2');
+        const prevBtn3 = document.getElementById('prevBtn3');
+
         // Password Toggle
-        const toggleProviderPass = document.getElementById('toggleProviderPass');
-        const providerPassword = document.getElementById('providerPassword');
+        const togglePass = document.getElementById('togglePass');
+        const password = document.getElementById('password');
+        const toggleConfirmPass = document.getElementById('toggleConfirmPass');
+        const confirmPassword = document.getElementById('confirmPassword');
 
-        toggleProviderPass.addEventListener('click', () => {
-            const type = providerPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-            providerPassword.setAttribute('type', type);
-            toggleProviderPass.querySelector('i').classList.toggle('fa-eye');
-            toggleProviderPass.querySelector('i').classList.toggle('fa-eye-slash');
+        togglePass.addEventListener('click', () => {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            togglePass.querySelector('i').classList.toggle('fa-eye');
+            togglePass.querySelector('i').classList.toggle('fa-eye-slash');
         });
 
-        // Two-Factor Authentication Flow
-        const loginBtn = document.getElementById('loginBtn');
-        const twoFactorSection = document.getElementById('twoFactorSection');
-        const verify2faBtn = document.getElementById('verify2faBtn');
-        const resendCodeLink = document.getElementById('resendCodeLink');
-        const 2faInputs = document.querySelectorAll('.2fa-input');
+        toggleConfirmPass.addEventListener('click', () => {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            toggleConfirmPass.querySelector('i').classList.toggle('fa-eye');
+            toggleConfirmPass.querySelector('i').classList.toggle('fa-eye-slash');
+        });
 
-        // Auto-focus next input for 2FA
-        2faInputs.forEach((input, index) => {
-            input.addEventListener('input', () => {
-                if (input.value.length === 1 && index < 5) {
-                    2faInputs[index + 1].focus();
+        // Password Validation
+        const passwordError = document.getElementById('passwordError');
+        const confirmError = document.getElementById('confirmError');
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        password.addEventListener('input', () => {
+            if (!passwordRegex.test(password.value)) {
+                passwordError.classList.remove('hidden');
+                nextBtn2.disabled = true;
+                nextBtn2.classList.add('btn-disabled');
+            } else {
+                passwordError.classList.add('hidden');
+                checkPasswordMatch();
+            }
+        });
+
+        confirmPassword.addEventListener('input', checkPasswordMatch);
+
+        function checkPasswordMatch() {
+            if (password.value !== confirmPassword.value) {
+                confirmError.classList.remove('hidden');
+                nextBtn2.disabled = true;
+                nextBtn2.classList.add('btn-disabled');
+            } else {
+                confirmError.classList.add('hidden');
+                if (passwordRegex.test(password.value)) {
+                    nextBtn2.disabled = false;
+                    nextBtn2.classList.remove('btn-disabled');
                 }
-            });
-        });
-
-        // Trigger 2FA section on login click
-        loginBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const license = document.getElementById('licenseNumber').value;
-            const pass = document.getElementById('providerPassword').value;
-            
-            if (license && pass) {
-                // Simulate initial authentication check
-                loginBtn.disabled = true;
-                loginBtn.textContent = 'Verifying Credentials...';
-                
-                setTimeout(() => {
-                    loginBtn.disabled = false;
-                    loginBtn.textContent = 'Sign In to Dashboard';
-                    twoFactorSection.classList.add('active');
-                    2faInputs[0].focus();
-                }, 1500);
-            } else {
-                alert('Please enter both license number and password');
             }
+        }
+
+        // Step Navigation Logic
+        nextBtn1.addEventListener('click', () => {
+            section1.classList.add('hidden');
+            section1.classList.remove('active');
+            section2.classList.remove('hidden');
+            section2.classList.add('active');
+            
+            step1.classList.add('completed');
+            step1.classList.remove('active');
+            step2.classList.add('active');
+            
+            progressBar.style.width = '66%';
+            step1.querySelector('.step-indicator').innerHTML = '<i class="fas fa-check"></i>';
         });
 
-        // Resend code functionality
-        resendCodeLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            resendCodeLink.textContent = 'Resending Code...';
-            resendCodeLink.style.pointerEvents = 'none';
+        prevBtn2.addEventListener('click', () => {
+            section2.classList.add('hidden');
+            section2.classList.remove('active');
+            section1.classList.remove('hidden');
+            section1.classList.add('active');
             
-            setTimeout(() => {
-                resendCodeLink.textContent = 'Resend Code (01:59 remaining)';
-                resendCodeLink.style.pointerEvents = 'auto';
-                alert('Verification code has been resent to your registered contact details');
-            }, 1000);
+            step2.classList.remove('active');
+            step1.classList.add('active');
+            step1.classList.remove('completed');
+            
+            progressBar.style.width = '33%';
+            step1.querySelector('.step-indicator').textContent = '1';
         });
 
-        // Verify 2FA and redirect
-        verify2faBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            let code = '';
-            2faInputs.forEach(input => code += input.value);
+        nextBtn2.addEventListener('click', () => {
+            section2.classList.add('hidden');
+            section2.classList.remove('active');
+            section3.classList.remove('hidden');
+            section3.classList.add('active');
             
-            if (code.length === 6) {
-                verify2faBtn.disabled = true;
-                verify2faBtn.textContent = 'Accessing Dashboard...';
-                
-                setTimeout(() => {
-                    alert('Authentication successful! Redirecting to provider dashboard.');
-                    window.location.href = 'provider-dashboard.html';
-                }, 1500);
-            } else {
-                alert('Please enter the complete 6-digit verification code');
-            }
+            step2.classList.add('completed');
+            step2.classList.remove('active');
+            step3.classList.add('active');
+            
+            progressBar.style.width = '100%';
+            step2.querySelector('.step-indicator').innerHTML = '<i class="fas fa-check"></i>';
+        });
+
+        prevBtn3.addEventListener('click', () => {
+            section3.classList.add('hidden');
+            section3.classList.remove('active');
+            section2.classList.remove('hidden');
+            section2.classList.add('active');
+            
+            step3.classList.remove('active');
+            step2.classList.add('active');
+            step2.classList.remove('completed');
+            
+            progressBar.style.width = '66%';
+            step2.querySelector('.step-indicator').textContent = '2';
+        });
+
+        // Form Submission Handling
+        const registrationForm = document.getElementById('registrationForm');
+        registrationForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Registration submitted successfully! You will receive a verification email shortly. Please upload a copy of your ID in the verification portal after email confirmation.');
+            // In production: Add form data handling, API call to backend, and redirect to verification page
+            window.location.href = 'patient-login.html';
         });
     </script>
 </body>
 </html>
-
