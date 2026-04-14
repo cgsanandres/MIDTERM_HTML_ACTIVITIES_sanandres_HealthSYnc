@@ -522,41 +522,21 @@
             </div>
 
             <ul class="nav-menu">
+                
                 <li class="nav-item">
-                    <a href="health.html" class="nav-link">
-                        <i class="fas fa-home"></i>
-                        <span>Home</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="patient-login.html" class="nav-link active">
+                    <a href="login.html" class="nav-link active">
                         <i class="fas fa-sign-in-alt"></i>
                         <span>Login</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="create-patient-account.html" class="nav-link">
+                    <a href="register.html" class="nav-link">
                         <i class="fas fa-user-plus"></i>
                         <span>Create Account</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="about.html" class="nav-link">
-                        <i class="fas fa-info-circle"></i>
-                        <span>About Us</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="services.html" class="nav-link">
-                        <i class="fas fa-stethoscope"></i>
-                        <span>Services</span>
-                    </a>
-                                <li class="nav-item">
-                    <a href="contact.html" class="nav-link">
-                        <i class="fas fa-phone-alt"></i>
-                        <span>Contact Us</span>
-                    </a>
-                </li>
+            
+                       
             </ul>
 
             <button class="sidebar-toggle-btn" id="sidebarToggle">
@@ -575,7 +555,7 @@
 
                 <div class="login-tabs">
                     <button class="tab-btn active" id="patientTab">Patient Login</button>
-                    <button class="tab-btn" id="providerTab">Provider Login</button>
+                    
                 </div>
 
                 <!-- Patient Login Form -->
@@ -606,55 +586,7 @@
                     <button type="submit" class="btn btn-primary">Sign In to Your Account</button>
                 </form>
 
-                <!-- Provider Login Form (Initially Hidden) -->
-                <form id="providerLoginForm" style="display: none;">
-                    <div class="form-group">
-                        <label for="providerId" class="form-label">Provider License Number</label>
-                        <input type="text" id="providerId" class="form-input" placeholder="Enter your license number" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="providerPassword" class="form-label">Password</label>
-                        <div class="input-group">
-                            <input type="password" id="providerPassword" class="form-input" placeholder="Enter your password" required>
-                            <button type="button" class="toggle-password" id="toggleProviderPass">
-                                <i class="fas fa-eye-slash"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" id="rememberProvider">
-                            <span>Remember me for 14 days</span>
-                        </label>
-                        <a href="forgot-provider-password.html" class="forgot-password">Forgot Password?</a>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Access Provider Dashboard</button>
-                </form>
-
-                <div class="divider">Or continue with</div>
-
-                <a href="create-patient-account.html" class="btn btn-secondary">Create New Patient Account</a>
-                <a href="create-provider-account.html" class="btn btn-secondary" id="providerSignupBtn" style="display: none;">Register as Healthcare Provider</a>
-
-                <div class="login-footer">
-                    <p>By signing in, you agree to our <a href="terms-of-service.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a></p>
-                </div>
-
-                <div class="security-badges">
-                    <div class="security-badge">
-                        <i class="fas fa-lock"></i>
-                        <span>Secure Encryption</span>
-                    </div>
-                    <div class="security-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>HIPAA Compliant</span>
-                    </div>
-                </div>
-            </div>
-        </main>
+                
     </div>
 
     <script>
@@ -692,8 +624,7 @@
         const patientTab = document.getElementById('patientTab');
         const providerTab = document.getElementById('providerTab');
         const patientLoginForm = document.getElementById('patientLoginForm');
-        const providerLoginForm = document.getElementById('providerLoginForm');
-        const providerSignupBtn = document.getElementById('providerSignupBtn');
+       
 
         patientTab.addEventListener('click', () => {
             patientTab.classList.add('active');
@@ -703,19 +634,10 @@
             providerSignupBtn.style.display = 'none';
         });
 
-        providerTab.addEventListener('click', () => {
-            providerTab.classList.add('active');
-            patientTab.classList.remove('active');
-            providerLoginForm.style.display = 'block';
-            patientLoginForm.style.display = 'none';
-            providerSignupBtn.style.display = 'block';
-        });
-
         // Toggle Password Visibility
         const togglePatientPass = document.getElementById('togglePatientPass');
         const patientPassword = document.getElementById('patientPassword');
-        const toggleProviderPass = document.getElementById('toggleProviderPass');
-        const providerPassword = document.getElementById('providerPassword');
+      
 
         togglePatientPass.addEventListener('click', () => {
             const type = patientPassword.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -724,12 +646,7 @@
             togglePatientPass.querySelector('i').classList.toggle('fa-eye-slash');
         });
 
-        toggleProviderPass.addEventListener('click', () => {
-            const type = providerPassword.getAttribute('type') === 'password' ? 'text' : 'password';
-            providerPassword.setAttribute('type', type);
-            toggleProviderPass.querySelector('i').classList.toggle('fa-eye');
-            toggleProviderPass.querySelector('i').classList.toggle('fa-eye-slash');
-        });
+       
 
         // Form Submission Handling
         patientLoginForm.addEventListener('submit', (e) => {
@@ -737,16 +654,10 @@
             const patientId = document.getElementById('patientId').value;
             alert(`Signing in patient ${patientId}... Redirecting to dashboard.`);
             // In production, add authentication logic here and redirect to patient-dashboard.html
-			window.location.href = 'patient-dashboard.html'; 
+			window.location.href = 'index.html'; 
         });
 
-        providerLoginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const providerId = document.getElementById('providerId').value;
-            alert(`Signing in provider ${providerId}... Redirecting to provider dashboard.`);
-            // In production, add authentication logic here and redirect to provider-dashboard.html
-			window.location.href = 'provider-dashboard.html'; 
-        });
+        
     </script>
 </body>
 </html>
